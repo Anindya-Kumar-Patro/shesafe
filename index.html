@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheSafe | Luxury Safety Technology</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0F172A', // Slate 900
+                            primary: '#1E293B', // Slate 800
+                            accent: '#D4AF37', // Gold
+                            rose: '#E2D1C3', // Rose Goldish
+                            safe: '#10B981', // Emerald
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #D4AF37, #E2D1C3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Pulse animation for the safety button demo */
+        @keyframes subtle-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        
+        .pulse-btn {
+            animation: subtle-pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4 px-6 lg:px-12 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-serif font-bold tracking-tight text-brand-dark">
+                She<span class="text-brand-accent">Safe</span>.
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+                <a href="#features" class="hover:text-brand-accent transition-colors">Features</a>
+                <a href="#technology" class="hover:text-brand-accent transition-colors">Guardian AI</a>
+                <a href="#design" class="hover:text-brand-accent transition-colors">Design</a>
+                <a href="#preorder" class="px-6 py-2 bg-brand-dark text-white rounded-full hover:bg-slate-700 transition-colors">Pre-order Now</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-800">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-gray-100 p-4 flex-col space-y-4 shadow-lg">
+            <a href="#features" class="block text-slate-600 hover:text-brand-accent">Features</a>
+            <a href="#technology" class="block text-slate-600 hover:text-brand-accent">Guardian AI</a>
+            <a href="#design" class="block text-slate-600 hover:text-brand-accent">Design</a>
+            <a href="#preorder" class="block text-center px-6 py-3 bg-brand-dark text-white rounded-lg">Pre-order Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=2727&auto=format&fit=crop" alt="Woman looking confident" class="w-full h-full object-cover opacity-90">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full grid md:grid-cols-2 gap-12 items-center">
+            <div class="text-white space-y-6 fade-in-up">
+                <span class="inline-block px-3 py-1 border border-brand-accent/50 text-brand-accent text-xs tracking-widest uppercase rounded-full">New Arrival</span>
+                <h1 class="text-5xl md:text-7xl font-serif font-bold leading-tight">
+                    Elegance that <br>
+                    <span class="gradient-text">Protects.</span>
+                </h1>
+                <p class="text-lg text-gray-200 max-w-md font-light">
+                    The first luxury smartwatch engineered with military-grade AI safety protocols. For the modern woman who demands style and peace of mind.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button onclick="scrollToSection('preorder')" class="px-8 py-4 bg-brand-accent text-slate-900 font-semibold rounded-full hover:bg-white transition-colors flex items-center justify-center gap-2">
+                        Secure Yours <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="scrollToSection('technology')" class="px-8 py-4 border border-white/30 backdrop-blur-sm text-white rounded-full hover:bg-white/10 transition-colors">
+                        Discover Guardian AI
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Watch Visual Representation -->
+            <div class="hidden md:flex justify-center items-center fade-in-up" style="transition-delay: 200ms;">
+               <div class="relative">
+                   <!-- Decorative Ring -->
+                   <div class="absolute -inset-4 border border-brand-accent/30 rounded-full w-[400px] h-[400px] animate-[spin_10s_linear_infinite]"></div>
+                   <div class="absolute -inset-12 border border-brand-accent/10 rounded-full w-[460px] h-[460px] animate-[spin_15s_linear_infinite_reverse]"></div>
+                   
+                   <!-- Watch Image Placeholder (Using a clean cutout style) -->
+                   <img src="https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?q=80&w=2671&auto=format&fit=crop" alt="SheSafe Watch Interface" class="relative w-80 h-80 object-cover rounded-full shadow-2xl border-4 border-slate-800">
+                   
+                   <!-- Floating Badge -->
+                   <div class="absolute top-0 right-0 bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl text-white shadow-lg pulse-btn">
+                       <div class="flex items-center gap-2">
+                           <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                           <span class="text-xs font-medium">System Active</span>
+                       </div>
+                       <div class="text-sm font-bold mt-1">Status: Safe</div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition / Features -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-dark mb-4">Beyond a Smartwatch</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">SheSafe combines the premium fitness and connectivity features you love with groundbreaking safety technology.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Standard Features -->
+                <div class="col-span-1 md:col-span-1 space-y-8">
+                    <div class="p-6 bg-slate-50 rounded-2xl hover:shadow-lg transition-shadow fade-in-up">
+                        <div class="w-12 h-12 bg-brand-rose/30 rounded-full flex items-center justify-center text-brand-dark mb-4">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Health Suite</h3>
+                        <p class="text-slate-500 text-sm">ECG, Heart Rate tracking, Oxygen saturation, and sleep analysis comparable to market leaders.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-2xl hover:shadow-lg transition-shadow fade-in-up" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 bg-brand-rose/30 rounded-full flex items-center justify-center text-brand-dark mb-4">
+                            <i data-lucide="smartphone" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Seamless Sync</h3>
+                        <p class="text-slate-500 text-sm">Crystal clear calls, messages, and app notifications directly on your wrist. Works with iOS and Android.</p>
+                    </div>
+                </div>
+
+                <!-- Center Piece -->
+                <div class="col-span-1 md:col-span-1 flex flex-col items-center justify-center fade-in-up" style="transition-delay: 200ms;">
+                    <img src="https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=2670&auto=format&fit=crop" class="w-full h-auto rounded-3xl shadow-2xl" alt="Watch Lifestyle">
+                    <div class="mt-8 text-center">
+                        <p class="text-brand-accent font-serif italic text-xl">"Luxury you can wear, safety you can trust."</p>
+                    </div>
+                </div>
+
+                <!-- Unique Features -->
+                <div class="col-span-1 md:col-span-1 space-y-8">
+                    <div class="p-6 bg-brand-dark text-white rounded-2xl hover:shadow-xl transition-shadow border border-brand-accent/20 fade-in-up" style="transition-delay: 300ms;">
+                        <div class="w-12 h-12 bg-brand-accent rounded-full flex items-center justify-center text-brand-dark mb-4">
+                            <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">SOS One-Touch</h3>
+                        <p class="text-gray-300 text-sm">Discreetly press the crown twice to instantly alert emergency contacts with your live location.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-2xl hover:shadow-lg transition-shadow fade-in-up" style="transition-delay: 400ms;">
+                        <div class="w-12 h-12 bg-brand-rose/30 rounded-full flex items-center justify-center text-brand-dark mb-4">
+                            <i data-lucide="battery-charging" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">7-Day Battery</h3>
+                        <p class="text-slate-500 text-sm">Optimized power management ensures your safety guardian doesn't sleep before you do.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Guardian AI Section (Deep Dive) -->
+    <section id="technology" class="py-24 bg-brand-dark relative overflow-hidden">
+        <!-- Abstract Background -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="#D4AF37" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-up">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i data-lucide="brain-circuit" class="text-brand-accent w-8 h-8"></i>
+                        <span class="text-brand-accent font-semibold tracking-widest uppercase text-sm">Exclusive Technology</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Guardian AI™ <br>Predictive Safety.</h2>
+                    <p class="text-gray-300 text-lg mb-6">
+                        Most watches react. SheSafe anticipates. Powered by advanced onboard neural processing, our proprietary AI learns your vitals and detects anomalies associated with distress.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3 text-gray-300">
+                            <i data-lucide="check-circle" class="text-green-400 w-5 h-5 mt-1"></i>
+                            <div>
+                                <strong class="text-white">Adrenaline Spike Detection:</strong>
+                                <span class="block text-sm opacity-80">Identifies sudden heart rate spikes coupled with stoppage of movement (fear response).</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-300">
+                            <i data-lucide="check-circle" class="text-green-400 w-5 h-5 mt-1"></i>
+                            <div>
+                                <strong class="text-white">Live Location Streaming:</strong>
+                                <span class="block text-sm opacity-80">Sends an encrypted map link to 5 trusted contacts that updates in real-time.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 text-gray-300">
+                            <i data-lucide="check-circle" class="text-green-400 w-5 h-5 mt-1"></i>
+                            <div>
+                                <strong class="text-white">False Alarm Check:</strong>
+                                <span class="block text-sm opacity-80">Vibrates subtly to confirm status before sending alerts.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="relative fade-in-up" style="transition-delay: 200ms;">
+                    <!-- Simulation UI -->
+                    <div class="bg-slate-800/50 backdrop-blur-xl border border-slate-600 rounded-3xl p-8 shadow-2xl">
+                        <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+                            <span class="text-white font-medium">Emergency Protocol</span>
+                            <span class="px-2 py-1 bg-red-500/20 text-red-400 text-xs rounded uppercase font-bold animate-pulse">Alert Triggered</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center text-white font-bold">M</div>
+                                <div class="flex-1">
+                                    <div class="text-white text-sm">Mom</div>
+                                    <div class="text-xs text-green-400">Notified via SMS</div>
+                                </div>
+                                <i data-lucide="check" class="text-green-400 w-4 h-4"></i>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center text-white font-bold">H</div>
+                                <div class="flex-1">
+                                    <div class="text-white text-sm">Hubby</div>
+                                    <div class="text-xs text-green-400">Location Sent</div>
+                                </div>
+                                <i data-lucide="check" class="text-green-400 w-4 h-4"></i>
+                            </div>
+                            <div class="mt-4 p-4 bg-slate-900 rounded-xl">
+                                <div class="text-xs text-slate-400 mb-2">Location Data</div>
+                                <div class="flex gap-2 items-center text-brand-accent">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                    <span class="text-sm font-mono">40.7128° N, 74.0060° W</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Decorative blurred circle behind -->
+                    <div class="absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-accent rounded-full blur-[100px] opacity-20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design/Specs -->
+    <section id="design" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-brand-dark">Aesthetics for Everyone</h2>
+                <p class="text-slate-600 mt-4">Designed to be unisex, elegant, and comfortable for all-day wear.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1510017098667-27dfc7150acb?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Rose Gold Variant">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
+                        <h3 class="text-white text-lg font-bold">Rose Gold</h3>
+                        <p class="text-slate-300 text-sm">Silk Silicone Strap</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer fade-in-up" style="transition-delay: 100ms;">
+                    <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?q=80&w=2672&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Midnight Blue Variant">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
+                        <h3 class="text-white text-lg font-bold">Midnight Blue</h3>
+                        <p class="text-slate-300 text-sm">Leather Strap</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer fade-in-up" style="transition-delay: 200ms;">
+                    <img src="https://images.unsplash.com/photo-1517420879524-86d64ac2f339?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Silver Tech Variant">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
+                        <h3 class="text-white text-lg font-bold">Sterling Silver</h3>
+                        <p class="text-slate-300 text-sm">Milanese Loop</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="group relative aspect-[4/5] overflow-hidden rounded-2xl cursor-pointer fade-in-up" style="transition-delay: 300ms;">
+                    <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2680&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Classic Black Variant">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
+                        <h3 class="text-white text-lg font-bold">Obsidian Black</h3>
+                        <p class="text-slate-300 text-sm">Sport Band</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center fade-in-up">
+            <i data-lucide="quote" class="w-12 h-12 text-brand-rose mx-auto mb-6"></i>
+            <p class="text-2xl md:text-3xl font-serif text-slate-800 italic leading-relaxed mb-6">
+                "I bought this for the style, but I wear it for the feeling of safety. Walking to my car at night feels completely different knowing my SheSafe watch has my back."
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=250&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="User">
+                <div class="text-left">
+                    <div class="font-bold text-slate-900">Sarah Jenkins</div>
+                    <div class="text-sm text-slate-500">Verified Buyer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Order / CTA Section -->
+    <section id="preorder" class="py-24 bg-brand-primary relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10 fade-in-up">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Join the Safety Revolution</h2>
+            <p class="text-lg text-slate-300 mb-10">
+                Premium features. Unbeatable safety. surprisingly affordable. <br>
+                <span class="text-brand-accent font-bold text-xl mt-2 block">Starting at just $149.</span>
+            </p>
+            
+            <div class="bg-white/10 backdrop-blur-md p-2 rounded-full flex flex-col sm:flex-row gap-2 max-w-lg mx-auto">
+                <input type="email" placeholder="Enter your email for early access" class="flex-1 bg-transparent text-white px-6 py-3 focus:outline-none placeholder:text-slate-400">
+                <button onclick="showSuccess()" class="bg-brand-accent text-slate-900 font-bold px-8 py-3 rounded-full hover:bg-white transition-colors">
+                    Reserve Now
+                </button>
+            </div>
+            <p class="text-xs text-slate-400 mt-4">Limited first batch. No spam, we promise.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark border-t border-slate-800 text-slate-400 py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 grid md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-1">
+                <a href="#" class="text-2xl font-serif font-bold tracking-tight text-white mb-4 block">
+                    She<span class="text-brand-accent">Safe</span>.
+                </a>
+                <p class="text-sm">Empowering safety through elegant technology. Designed for everyone, focused on protection.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold mb-4">Product</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-brand-accent">Features</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Guardian AI</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Accessories</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold mb-4">Company</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-brand-accent">Our Story</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-brand-accent">Contact Support</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-white font-bold mb-4">Connect</h4>
+                <div class="flex gap-4">
+                    <i data-lucide="instagram" class="w-5 h-5 cursor-pointer hover:text-brand-accent"></i>
+                    <i data-lucide="twitter" class="w-5 h-5 cursor-pointer hover:text-brand-accent"></i>
+                    <i data-lucide="facebook" class="w-5 h-5 cursor-pointer hover:text-brand-accent"></i>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 mt-12 pt-8 border-t border-slate-800 text-center text-xs">
+            &copy; 2023 SheSafe Technology Inc. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-white text-slate-800 px-6 py-4 rounded-lg shadow-2xl transform translate-y-24 transition-transform duration-300 z-50 border-l-4 border-brand-accent flex items-center gap-3">
+        <i data-lucide="check-circle" class="text-green-500"></i>
+        <div>
+            <h4 class="font-bold text-sm">Success!</h4>
+            <p class="text-xs text-slate-500">You've been added to the reservation list.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Scroll Animation Logic
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        });
+
+        // Smooth Scroll handling
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.remove('py-2');
+                nav.classList.add('py-4');
+            }
+        });
+
+        // Toast Notification
+        function showSuccess() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-24');
+            setTimeout(() => {
+                toast.classList.add('translate-y-24');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
